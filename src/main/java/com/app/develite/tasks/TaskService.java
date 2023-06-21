@@ -40,13 +40,15 @@ public class TaskService {
                 existingTask.setStatus(updatedTask.getStatus());
             }
 
-
-            
             if (!existingTask.getStart_date().equals(updatedTask.getStart_date())) {
                 existingTask.setStart_date(updatedTask.getStart_date());
             }
             if (!existingTask.getEnd_date().equals(updatedTask.getEnd_date())) {
                 existingTask.setEnd_date(updatedTask.getEnd_date());
+            }
+
+            if (!existingTask.getProject().equals(updatedTask.getProject())) {
+                existingTask.setProject(updatedTask.getProject());
             }
 
             // Update other task fields as needed

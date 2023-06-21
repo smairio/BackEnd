@@ -3,17 +3,11 @@ package com.app.develite.tasks;
 import java.sql.Date;
 
 
+import com.app.develite.project.Project;
 import com.app.develite.project.Status;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -25,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "task",uniqueConstraints=
-                    {@UniqueConstraint(columnNames="title",name ="unique_titme")})
+                    {@UniqueConstraint(columnNames="title",name ="unique_title")})
 public class Task {
     
     @Id
@@ -56,6 +50,9 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY ,optional = false)
+    @JoinColumn(name="project_id" ,nullable = false)
+    private Project project;
 
 }
